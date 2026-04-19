@@ -1263,7 +1263,7 @@
       </div>
       <div class="map-wrap">
         <iframe
-          src="<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.472559748392!2d2.1403419766743443!3d43.9288928345555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12adc2a9848258af%3A0x629f194258cef3c4!2sRestaurant%20-%20Salon%20de%20Th%C3%A9%20le%20May%20Milton!5e0!3m2!1sfr!2sus!4v1776635422192!5m2!1sfr!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5690.8!2d2.1449!3d43.9278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aeb8de8c8cf8bf%3A0xad3ae5d7fb95fbdd!2sCath%C3%A9drale+Sainte-C%C3%A9cile+d%27Albi!5e0!3m2!1sfr!2sfr!4v1"
           allowfullscreen
           loading="lazy"
           title="Localisation du May Milton – Albi, Cathédrale Sainte-Cécile">
@@ -1442,7 +1442,7 @@
       { text: '"Un endroit magique au pied de la cathédrale. La cuisine est délicieuse, tout est fait maison. L\'équipe est chaleureuse et le cadre avec les pierres apparentes est vraiment unique."', author: '— Marie L.', stars: 5 },
       { text: '"Excellent restaurant, cuisine fraîche et savoureuse. La terrasse avec vue sur la cathédrale est splendide. Je recommande vivement les formules du midi, rapport qualité-prix imbattable."', author: '— Thomas B.', stars: 5 },
       { text: '"Une adresse incontournable à Albi. Cadre historique magnifique, service attentionné et plats faits maison délicieux. Le dessert était à tomber !"', author: '— Sophie R.', stars: 5 },
-      { text: '"Superbe découverte lors de notre passage à Albi. L\'équipe est adorable, la cuisine est fraîche et gourmande. On reviendra sûrement lors de notre prochain séjour !"', author: '— Olivier Fonse', stars: 5 },
+      { text: '"Superbe découverte lors de notre passage à Albi. L\'équipe est adorable, la cuisine est fraîche et gourmande. On reviendra sûrement lors de notre prochain séjour !"', author: '— Un utilisateur Google', stars: 5 },
       { text: '"Très bon établissement situé à proximité de la cathédrale. Avons déjeuner en terrasse. Accueil et prise en charge rapide et agréable."', author: '— Patrick S.', stars: 5 },
       { text: '"J\'ai découvert le restaurant Le May Milton par pure hasard à Albi, et quelle belle surprise ! Dès mon arrivée, on a été chaleureusement accueilli par une équipe dynamique et souriante, qui met un point d\'honneur à offrir un service…"', author: '— Matis GRD', stars: 5 },
       { text: '"Bien situé dans une ruelle près de la cathédrale. Grande salle au calme avec un petit bassin de carpes. Menus à prix très correct. Plats cuisinés avec finesse. Nous avons passés un très bon moment dans ce restaurant."', author: '— Laëtitia Lgg', stars: 5 },
@@ -1464,61 +1464,38 @@
       { text: '"Resto proche de la cathédrale avec accueil sympa et personnel souriant. Choix et spécialités locales dont le perlé pour l\'apéro. À découvrir !"', author: '— Patrick H.', stars: 5 }
     ];
 
-    /* --- Configuration pagination --- */
-    const TOTAL_DOTS = 5;
-    /* Taille d'un groupe : arrondi supérieur pour couvrir tous les avis */
-    const groupSize  = Math.ceil(reviews.length / TOTAL_DOTS);
-
-    let current   = 0;
+    let current  = 0;
     let autoTimer = null;
 
-    /* --- Génération des 5 dots fixes --- */
+    /* Génération dynamique des dots */
     const dotsContainer = document.getElementById('avisDots');
-
-    for (let i = 0; i < TOTAL_DOTS; i++) {
+    reviews.forEach(function(_, i) {
       const dot = document.createElement('div');
       dot.className = 'dot' + (i === 0 ? ' active' : '');
-      dot.dataset.group = i;
-      /* Cliquer sur un dot → premier avis du groupe correspondant */
-      dot.addEventListener('click', function() {
-        showReview(i * groupSize);
-        startAuto();
-      });
+      dot.dataset.i = i;
+      dot.addEventListener('click', function() { showReview(i); startAuto(); });
       dotsContainer.appendChild(dot);
-    }
+    });
 
-    /* Retourne l'indice du dot actif (0-4) pour un index d'avis donné */
-    function getActiveDot(reviewIndex) {
-      return Math.min(Math.floor(reviewIndex / groupSize), TOTAL_DOTS - 1);
-    }
-
-    /* --- Affichage d'un avis --- */
     function showReview(i) {
       const card = document.getElementById('avisCard');
       card.style.opacity = '0';
       setTimeout(() => {
-        /* Boucle infinie : modulo avec gestion des négatifs */
         current = ((i % reviews.length) + reviews.length) % reviews.length;
         const r = reviews[current];
         document.getElementById('avisText').textContent   = r.text;
         document.getElementById('avisAuthor').textContent = r.author;
         document.getElementById('avisStars').textContent  = '★'.repeat(r.stars);
-        /* Mise à jour du dot actif */
-        const activeDot = getActiveDot(current);
-        document.querySelectorAll('.dot').forEach((d, j) =>
-          d.classList.toggle('active', j === activeDot)
-        );
+        document.querySelectorAll('.dot').forEach((d, j) => d.classList.toggle('active', j === current));
         card.style.opacity = '1';
       }, 220);
     }
 
-    /* --- Autoplay --- */
     function startAuto() {
       clearInterval(autoTimer);
       autoTimer = setInterval(() => showReview(current + 1), 6000);
     }
 
-    /* --- Flèches --- */
     document.getElementById('nextAvis').addEventListener('click', () => { showReview(current + 1); startAuto(); });
     document.getElementById('prevAvis').addEventListener('click', () => { showReview(current - 1); startAuto(); });
 
