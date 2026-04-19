@@ -3,36 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Le May Milton – Restaurant & Salon de Thé – Albi</title>
+  <meta name="description" content="Le May Milton – Restaurant & Salon de Thé au pied de la Cathédrale Sainte-Cécile à Albi. Cuisine 100% fait maison, produits frais de saison. Réservation en ligne.">
+  <title>Le May Milton – Restaurant &amp; Salon de Thé – Albi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ===== VARIABLES ===== */
+    /* ===================================================
+       VARIABLES
+    =================================================== */
     :root {
-      --navy: #1a2744;
-      --navy-mid: #243058;
-      --gold: #9a7e35;
+      --navy:       #1a2744;
+      --navy-mid:   #243058;
+      --gold:       #9a7e35;
       --gold-light: #c4a24a;
-      --cream: #f5f0e6;
-      --white: #fafaf7;
-      --text-dark: #1a2744;
-      --text-mid: #4a4a5a;
-      --radius: 16px;
+      --cream:      #f5f0e6;
+      --white:      #fafaf7;
+      --text-dark:  #1a2744;
+      --text-mid:   #4a4a5a;
+      --radius:     16px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    /* ===================================================
+       RESET & BASE
+    =================================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Lora', serif;
       background: var(--white);
       color: var(--text-dark);
       overflow-x: hidden;
     }
+    img { max-width: 100%; display: block; }
 
-    /* ===== NAVBAR ===== */
+    /* ===================================================
+       NAVBAR
+    =================================================== */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -41,20 +48,19 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 48px;
-      transition: background 0.4s;
+      transition: background 0.4s, padding 0.3s;
     }
     nav.scrolled {
-      background: rgba(26,39,68,0.96);
-      backdrop-filter: blur(10px);
+      background: rgba(26,39,68,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       padding: 12px 48px;
     }
-
     .nav-logo img {
-      height: 48px;
+      height: 46px;
       filter: brightness(0) invert(1);
-      display: block;
+      width: auto;
     }
-
     .nav-menu {
       position: absolute;
       left: 50%;
@@ -65,15 +71,9 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 6px;
+      padding: 8px;
     }
-    .nav-menu span {
-      display: block;
-      width: 26px;
-      height: 1.5px;
-      background: white;
-    }
-
+    .nav-menu span { display: block; width: 26px; height: 1.5px; background: white; }
     .nav-cta {
       display: flex;
       align-items: center;
@@ -81,7 +81,7 @@
       background: var(--navy);
       color: white;
       border: none;
-      padding: 13px 30px;
+      padding: 13px 28px;
       font-family: 'Oswald', sans-serif;
       font-size: 13px;
       letter-spacing: 1.5px;
@@ -89,12 +89,15 @@
       cursor: pointer;
       border-radius: 40px;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: background 0.25s;
+      white-space: nowrap;
     }
     nav.scrolled .nav-cta { background: var(--gold); }
     .nav-cta:hover { background: var(--gold); }
 
-    /* ===== HERO ===== */
+    /* ===================================================
+       HERO
+    =================================================== */
     .hero {
       height: 100vh;
       min-height: 600px;
@@ -103,7 +106,6 @@
       display: flex;
       align-items: flex-end;
     }
-
     .hero-bg {
       position: absolute;
       inset: 0;
@@ -111,82 +113,53 @@
       height: 100%;
       object-fit: cover;
       object-position: center 30%;
-      filter: brightness(0.55);
+      filter: brightness(0.52);
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
       width: 100%;
-      padding: 0 0 70px 0;
+      padding: 0 20px 80px;
       text-align: center;
     }
 
+    /* Eyebrow – pill doré bien visible */
     .hero-eyebrow {
+      display: inline-block;
       font-family: 'Raleway', sans-serif;
-      font-size: clamp(11px, 1.5vw, 14px);
-      letter-spacing: 6px;
+      font-size: clamp(12px, 1.8vw, 15px);
+      letter-spacing: 5px;
       text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 12px;
-      opacity: 0.9;
+      color: #fff;
+      background: rgba(154,126,53,0.85);
+      padding: 9px 24px;
+      border-radius: 40px;
+      margin-bottom: 18px;
     }
-
     .hero-title {
       font-family: 'Oswald', sans-serif;
-      font-size: clamp(72px, 13vw, 180px);
+      font-size: clamp(68px, 13vw, 180px);
       font-weight: 700;
       color: var(--cream);
       line-height: 0.88;
       letter-spacing: -2px;
     }
-
     .hero-title .gold { color: var(--gold-light); }
-
     .hero-line {
       position: absolute;
-      bottom: 0;
-      left: 0; right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 3px;
       background: var(--cream);
-      opacity: 0.9;
+      opacity: 0.88;
     }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      width: 44px;
-      height: 68px;
-      border-radius: 22px;
-      background: rgba(154,126,53,0.75);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      animation: bob 2s ease-in-out infinite;
-    }
-    .hero-scroll::after {
-      content: '';
-      width: 9px;
-      height: 9px;
-      border-right: 2px solid white;
-      border-bottom: 2px solid white;
-      transform: rotate(45deg) translateY(-3px);
-    }
-    @keyframes bob {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
-    }
-
-    /* ===== ABOUT ===== */
+    /* ===================================================
+       ABOUT
+    =================================================== */
     .about {
       padding: 110px 0 90px;
       background: var(--white);
     }
-
     .about-inner {
       max-width: 1300px;
       margin: 0 auto;
@@ -196,7 +169,6 @@
       gap: 80px;
       align-items: center;
     }
-
     .kicker {
       font-family: 'Raleway', sans-serif;
       font-size: 11px;
@@ -205,25 +177,20 @@
       color: var(--gold);
       margin-bottom: 18px;
     }
-
     .about h2 {
       font-family: 'Oswald', sans-serif;
-      font-size: clamp(34px, 3.5vw, 52px);
+      font-size: clamp(32px, 3.5vw, 52px);
       font-weight: 400;
       line-height: 1.1;
       color: var(--navy);
-      margin-bottom: 6px;
     }
     .about h2 strong { font-weight: 700; }
-
     .about-desc {
       font-size: 16px;
       line-height: 1.85;
       color: var(--text-mid);
       margin-top: 24px;
-      margin-bottom: 12px;
     }
-
     .btn-outline {
       display: inline-flex;
       align-items: center;
@@ -240,36 +207,25 @@
       margin-top: 28px;
       transition: all 0.25s;
     }
-    .btn-outline:hover {
-      background: var(--navy);
-      color: white;
-    }
+    .btn-outline:hover { background: var(--navy); color: white; }
 
+    /* 2 photos (sans intérieur, déplacé dans Privatisation) */
     .about-photos {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 280px 200px;
       gap: 14px;
     }
-
     .about-photos img {
       width: 100%;
-      height: 100%;
+      height: 340px;
       object-fit: cover;
       border-radius: var(--radius);
-      display: block;
     }
 
-    .about-photos img:first-child {
-      grid-column: 1 / -1;
-    }
-
-    /* ===== GALERIE ===== */
-    .galerie {
-      padding: 0 0 100px;
-      background: var(--white);
-    }
-
+    /* ===================================================
+       GALERIE
+    =================================================== */
+    .galerie { padding: 0 0 100px; background: var(--white); }
     .galerie-grid {
       max-width: 1300px;
       margin: 0 auto;
@@ -279,27 +235,20 @@
       grid-template-rows: 300px;
       gap: 14px;
     }
-
     .galerie-grid img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       border-radius: var(--radius);
-      display: block;
     }
 
-    /* ===== VIDEO + RÉSERVATION ===== */
-    .video-reserve {
-      background: var(--cream);
-      padding: 90px 0;
-    }
-
+    /* ===================================================
+       SECTION HEADER (partagé)
+    =================================================== */
     .section-header {
       text-align: center;
       margin-bottom: 60px;
-      padding: 0 48px;
+      padding: 0 24px;
     }
-
     .section-kicker {
       font-family: 'Raleway', sans-serif;
       font-size: 11px;
@@ -308,66 +257,101 @@
       color: var(--gold);
       margin-bottom: 14px;
     }
-
     .section-title {
       font-family: 'Oswald', sans-serif;
-      font-size: clamp(30px, 3.5vw, 48px);
+      font-size: clamp(28px, 3.5vw, 48px);
       font-weight: 600;
       color: var(--navy);
       line-height: 1.1;
     }
 
-    .vr-inner {
-      max-width: 1300px;
+    /* ===================================================
+       PRIVATISATION (vidéo Short + image intérieur)
+    =================================================== */
+    .privatisation {
+      background: var(--cream);
+      padding: 90px 0;
+    }
+    .priv-inner {
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 48px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      align-items: start;
+      grid-template-columns: 310px 1fr;
+      gap: 44px;
+      align-items: stretch;
     }
-
-    .vr-block h3 {
+    .priv-label {
       font-family: 'Oswald', sans-serif;
-      font-size: 13px;
-      letter-spacing: 2px;
+      font-size: 12px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    .video-wrap {
+    /* Vidéo Short — ratio 9:16 strict */
+    .video-short-wrap {
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 24px 60px rgba(26,39,68,0.14);
+      box-shadow: 0 20px 50px rgba(26,39,68,0.16);
       background: #000;
     }
-    .video-wrap iframe {
-      width: 100%;
-      height: 420px;
-      display: block;
+    .video-short-ratio {
+      position: relative;
+      padding-bottom: 177.78%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-short-ratio iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       border: none;
     }
 
-    .reserve-wrap {
+    /* Image intérieur */
+    .priv-img-wrap {
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 24px 60px rgba(26,39,68,0.14);
-      background: white;
+      box-shadow: 0 20px 50px rgba(26,39,68,0.14);
     }
-    .reserve-wrap iframe {
+    .priv-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      min-height: 440px;
+    }
+
+    /* ===================================================
+       RÉSERVATION
+    =================================================== */
+    .reservation {
+      background: var(--white);
+      padding: 90px 0;
+    }
+    .reserve-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .reserve-frame-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(26,39,68,0.12);
+      background: white;
+      border: 1px solid rgba(26,39,68,0.07);
+    }
+    .reserve-frame-wrap iframe {
       width: 100%;
-      height: 420px;
+      height: 500px;
       display: block;
       border: none;
     }
 
-    /* ===== FEATURES BAR ===== */
-    .features {
-      background: var(--navy);
-      padding: 64px 48px;
-    }
-
+    /* ===================================================
+       FEATURES BAR
+    =================================================== */
+    .features { background: var(--navy); padding: 64px 48px; }
     .features-grid {
       max-width: 1200px;
       margin: 0 auto;
@@ -376,29 +360,20 @@
       gap: 40px;
       text-align: center;
     }
-
     .feature-icon {
-      width: 62px;
-      height: 62px;
+      width: 62px; height: 62px;
       border-radius: 50%;
       border: 1px solid rgba(255,255,255,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 18px;
       font-size: 26px;
     }
-
     .feature h3 {
       font-family: 'Oswald', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      color: white;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 1.5px; color: white;
+      text-transform: uppercase; margin-bottom: 12px;
     }
-
     .feature p {
       font-size: 13px;
       color: rgba(255,255,255,0.6);
@@ -406,398 +381,361 @@
       font-family: 'Raleway', sans-serif;
     }
 
-    /* ===== AVIS ===== */
-    .avis {
-      padding: 90px 48px;
-      background: var(--white);
-    }
-
-    .avis-inner {
-      max-width: 780px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
+    /* ===================================================
+       AVIS
+    =================================================== */
+    .avis { padding: 90px 24px; background: var(--white); }
+    .avis-inner { max-width: 780px; margin: 0 auto; text-align: center; }
     .avis-card {
-      padding: 50px 40px;
+      padding: 46px 40px;
       background: white;
       border-radius: 24px;
       box-shadow: 0 4px 30px rgba(26,39,68,0.08);
       border: 1px solid rgba(26,39,68,0.06);
-      min-height: 240px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.3s;
+      min-height: 230px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 0.3s ease;
     }
-
     .avis-google-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 22px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-bottom: 20px;
     }
-
-    .g-logo {
-      width: 28px;
-      height: 28px;
-    }
-
-    .google-label {
-      font-family: 'Raleway', sans-serif;
-      font-size: 13px;
-      color: #777;
-      letter-spacing: 0.5px;
-    }
-
-    .stars {
-      color: #fbbc05;
-      font-size: 20px;
-      letter-spacing: 3px;
-      margin-bottom: 22px;
-    }
-
-    .avis-text {
-      font-size: 16.5px;
-      line-height: 1.8;
-      color: var(--text-mid);
-      font-style: italic;
-      margin-bottom: 20px;
-    }
-
-    .avis-author {
-      font-family: 'Oswald', sans-serif;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--navy);
-    }
-
+    .g-logo { width: 28px; height: 28px; }
+    .google-label { font-family: 'Raleway', sans-serif; font-size: 13px; color: #888; }
+    .stars { color: #fbbc05; font-size: 20px; letter-spacing: 3px; margin-bottom: 20px; }
+    .avis-text { font-size: 16px; line-height: 1.8; color: var(--text-mid); font-style: italic; margin-bottom: 18px; }
+    .avis-author { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); }
     .avis-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      margin-top: 28px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 18px; margin-top: 28px;
     }
-
     .avis-btn {
-      width: 46px;
-      height: 46px;
+      width: 46px; height: 46px;
       border-radius: 50%;
       border: 1.5px solid var(--navy);
-      background: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--navy);
-      transition: all 0.2s;
+      background: white; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy); transition: all 0.2s; flex-shrink: 0;
     }
-    .avis-btn:hover {
-      background: var(--navy);
-      color: white;
-    }
+    .avis-btn:hover { background: var(--navy); color: white; }
     .avis-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
-
-    .avis-dots {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
+    .avis-dots { display: flex; gap: 8px; align-items: center; }
     .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ddd;
-      cursor: pointer;
-      transition: all 0.2s;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #ddd; cursor: pointer; transition: all 0.25s;
     }
-    .dot.active {
-      background: var(--gold);
-      width: 22px;
-      border-radius: 4px;
-    }
+    .dot.active { background: var(--gold); width: 22px; border-radius: 4px; }
 
-    /* ===== CONTACT + MAP ===== */
-    .contact-section {
-      background: var(--cream);
-      padding: 90px 48px;
-    }
-
+    /* ===================================================
+       CONTACT + HORAIRES + MAP
+    =================================================== */
+    .contact-section { background: var(--cream); padding: 90px 48px; }
     .contact-inner {
-      max-width: 1300px;
-      margin: 0 auto;
+      max-width: 1300px; margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr 1.3fr;
-      gap: 48px;
-      align-items: start;
+      gap: 48px; align-items: start;
     }
-
     .contact-block h3 {
       font-family: 'Oswald', sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 22px;
+      font-size: 18px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--navy); margin-bottom: 22px;
       padding-bottom: 14px;
       border-bottom: 2px solid var(--gold);
       display: inline-block;
     }
-
-    .contact-block p {
-      font-size: 14.5px;
-      line-height: 2.1;
-      color: var(--text-mid);
-    }
-
-    .contact-block a {
-      color: var(--gold);
-      text-decoration: none;
-    }
+    .contact-block p { font-size: 14.5px; line-height: 2.1; color: var(--text-mid); }
+    .contact-block a { color: var(--gold); text-decoration: none; }
     .contact-block a:hover { text-decoration: underline; }
-
     .horaire-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      padding: 6px 0;
+      display: flex; justify-content: space-between;
+      font-size: 14px; padding: 7px 0;
       border-bottom: 1px solid rgba(26,39,68,0.07);
       color: var(--text-mid);
     }
-    .horaire-row:last-child { border-bottom: none; }
+    .horaire-row:last-of-type { border-bottom: none; }
     .horaire-row.open .day { color: var(--navy); font-weight: 500; }
     .horaire-row .time { color: var(--gold); font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 1px; }
-    .horaire-row .fermé { color: #aaa; font-style: italic; }
-
+    .horaire-row .ferme { color: #aaa; font-style: italic; }
     .map-wrap {
-      border-radius: var(--radius);
-      overflow: hidden;
+      border-radius: var(--radius); overflow: hidden;
       box-shadow: 0 12px 40px rgba(26,39,68,0.12);
-      height: 100%;
       min-height: 340px;
     }
-    .map-wrap iframe {
-      width: 100%;
-      height: 100%;
-      min-height: 340px;
-      border: none;
-      display: block;
-    }
+    .map-wrap iframe { width: 100%; height: 100%; min-height: 340px; border: none; display: block; }
 
-    /* ===== FOOTER ===== */
-    footer {
-      background: var(--navy);
-      padding: 50px 48px 36px;
-    }
-
+    /* ===================================================
+       FOOTER
+    =================================================== */
+    footer { background: var(--navy); padding: 50px 48px 36px; }
     .footer-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1300px;
-      margin: 0 auto 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1300px; margin: 0 auto 32px;
       padding-bottom: 32px;
       border-bottom: 1px solid rgba(255,255,255,0.12);
+      gap: 20px;
     }
-
-    .footer-logo img {
-      height: 56px;
-      filter: brightness(0) invert(1);
-      opacity: 0.85;
-    }
-
-    .footer-tagline {
-      font-family: 'Raleway', sans-serif;
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .footer-socials {
-      display: flex;
-      gap: 16px;
-    }
+    .footer-logo img { height: 54px; filter: brightness(0) invert(1); opacity: 0.85; width: auto; }
+    .footer-tagline { font-family: 'Raleway', sans-serif; font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+    .footer-socials { display: flex; gap: 14px; }
     .footer-socials a {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      width: 40px; height: 40px; border-radius: 50%;
       border: 1px solid rgba(255,255,255,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.6);
-      font-family: 'Oswald', sans-serif;
-      font-size: 13px;
-      text-decoration: none;
-      transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6); font-family: 'Oswald', sans-serif;
+      font-size: 13px; text-decoration: none; transition: all 0.2s;
     }
-    .footer-socials a:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: white;
-    }
-
+    .footer-socials a:hover { background: var(--gold); border-color: var(--gold); color: white; }
     .footer-bottom {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: 1300px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
     }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-    }
-    .footer-links a {
-      font-size: 11px;
-      color: rgba(255,255,255,0.35);
-      text-decoration: none;
-      font-family: 'Raleway', sans-serif;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { font-size: 11px; color: rgba(255,255,255,0.35); text-decoration: none; font-family: 'Raleway', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
     .footer-links a:hover { color: var(--gold-light); }
+    .footer-copy { font-size: 11px; color: rgba(255,255,255,0.3); font-family: 'Raleway', sans-serif; }
 
-    .footer-copy {
-      font-size: 11px;
-      color: rgba(255,255,255,0.3);
-      font-family: 'Raleway', sans-serif;
+    /* ===================================================
+       RESPONSIVE — TABLETTE (≤ 1024px)
+    =================================================== */
+    @media (max-width: 1024px) {
+      .priv-inner { grid-template-columns: 260px 1fr; gap: 28px; padding: 0 32px; }
+      .about-inner { gap: 48px; padding: 0 32px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .contact-section { padding: 90px 32px; }
+      .contact-inner { grid-template-columns: 1fr 1fr; }
+      .map-wrap { grid-column: 1 / -1; }
     }
 
-    /* ===== CURVE DIVIDER ===== */
-    .wave-divider {
-      display: block;
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
+    /* ===================================================
+       RESPONSIVE — MOBILE (≤ 768px)
+    =================================================== */
+    @media (max-width: 768px) {
+
+      /* Nav */
+      nav { padding: 14px 20px; }
+      nav.scrolled { padding: 10px 20px; }
+      .nav-logo img { height: 36px; }
+      .nav-menu { display: none; }
+      .nav-cta { padding: 10px 18px; font-size: 11px; letter-spacing: 1px; }
+
+      /* Hero */
+      .hero { min-height: 100svh; align-items: center; }
+      .hero-content { padding: 0 16px 50px; }
+      .hero-eyebrow { font-size: 11px; letter-spacing: 3px; padding: 7px 16px; margin-bottom: 14px; }
+      .hero-title { font-size: clamp(54px, 16vw, 86px); letter-spacing: -1px; }
+
+      /* About */
+      .about { padding: 72px 0 56px; }
+      .about-inner { grid-template-columns: 1fr; gap: 36px; padding: 0 20px; }
+      .about-photos { grid-template-columns: 1fr 1fr; }
+      .about-photos img { height: 200px; }
+
+      /* Galerie */
+      .galerie { padding: 0 0 56px; }
+      .galerie-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 12px; padding: 0 20px; }
+      .galerie-grid img { height: 220px; width: 100%; }
+
+      /* Privatisation */
+      .privatisation { padding: 64px 0; }
+      .priv-inner { grid-template-columns: 1fr; gap: 32px; padding: 0 20px; }
+      .video-short-wrap { max-width: 280px; width: 100%; margin: 0 auto; }
+      .priv-img-wrap img { min-height: 260px; height: 300px; }
+
+      /* Réservation */
+      .reservation { padding: 64px 0; }
+      .reserve-inner { padding: 0 20px; }
+      .reserve-frame-wrap iframe { height: 560px; }
+
+      /* Features */
+      .features { padding: 56px 20px; }
+      .features-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .feature h3 { font-size: 12px; }
+      .feature p { font-size: 12px; }
+
+      /* Avis */
+      .avis { padding: 64px 16px; }
+      .avis-card { padding: 32px 20px; }
+      .avis-text { font-size: 15px; }
+
+      /* Contact */
+      .contact-section { padding: 64px 20px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .map-wrap { grid-column: auto; min-height: 280px; }
+      .map-wrap iframe { min-height: 280px; }
+
+      /* Footer */
+      footer { padding: 40px 20px 28px; }
+      .footer-top { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+      .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+      .footer-links { justify-content: center; gap: 16px; }
+
+      /* Section headers */
+      .section-header { padding: 0 16px; margin-bottom: 40px; }
     }
-    .wave-divider svg { display: block; }
+
+    /* ===================================================
+       RESPONSIVE — PETITS MOBILES (≤ 420px)
+    =================================================== */
+    @media (max-width: 420px) {
+      .hero-title { font-size: clamp(46px, 18vw, 68px); }
+      .hero-eyebrow { font-size: 10px; letter-spacing: 2px; padding: 6px 14px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .about-photos { grid-template-columns: 1fr; }
+      .about-photos img { height: 240px; }
+      .nav-cta { padding: 9px 14px; font-size: 10px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
+  <!-- NAVBAR -->
   <nav id="navbar">
     <a href="#" class="nav-logo">
-      <img src="images/logo.png" alt="Le May Milton">
+      <img src="images/logo.png" alt="Le May Milton – Restaurant &amp; Salon de Thé" width="120" height="46">
     </a>
-    <button class="nav-menu" aria-label="Menu">
+    <button class="nav-menu" aria-label="Ouvrir le menu">
       <span></span><span></span><span></span>
     </button>
     <a href="#reserver" class="nav-cta">Réserver ↗</a>
   </nav>
 
-  <!-- ===== HERO ===== -->
+  <!-- HERO -->
   <section class="hero">
-    <img src="images/VILLE_ALBI.webp" alt="Albi, Cité épiscopale" class="hero-bg">
+    <img
+      src="images/VILLE_ALBI.webp"
+      alt="Vue panoramique d'Albi, Cité épiscopale classée UNESCO"
+      class="hero-bg"
+      fetchpriority="high"
+      width="1920" height="1080"
+    >
     <div class="hero-content">
-      <p class="hero-eyebrow">Restaurant · Salon de Thé · Albi</p>
+      <p class="hero-eyebrow">Restaurant &nbsp;·&nbsp; Salon de Thé &nbsp;·&nbsp; Albi</p>
       <h1 class="hero-title">Le May<br><span class="gold">Milton</span></h1>
     </div>
-    <div class="hero-line"></div>
-    <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="hero-line" aria-hidden="true"></div>
   </section>
 
-  <!-- ===== ABOUT ===== -->
+  <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-inner">
       <div>
         <p class="kicker">Au cœur d'Albi</p>
         <h2>Le Bar-Restaurant<br><strong>Le May Milton</strong></h2>
         <p class="about-desc">Au pied de la Cathédrale Sainte-Cécile et du Musée Toulouse-Lautrec, le May Milton vous accueille dans un cadre historique exceptionnel — pierres apparentes, site archéologique classé, jardins suspendus et bassin aux carpes.</p>
-        <p class="about-desc">Notre cuisine est <strong>100% fait maison</strong>, élaborée à partir de produits frais et de saison. Jusqu'à 100 couverts en salle et en terrasse, avec un étage privatisable pour vos événements (séminaires, mariages, repas de famille).</p>
+        <p class="about-desc" style="margin-top:12px;">Notre cuisine est <strong>100% fait maison</strong>, élaborée à partir de produits frais et de saison. Jusqu'à 100 couverts en salle et terrasse, avec un étage privatisable pour vos événements.</p>
         <a href="#reserver" class="btn-outline">Réserver une table →</a>
       </div>
       <div class="about-photos">
-        <img src="images/interieur.webp" alt="Salle intérieure du May Milton">
-        <img src="images/apropos.webp" alt="L'équipe du May Milton">
-        <img src="images/facadeR.webp" alt="Façade du restaurant">
+        <img src="images/apropos.webp"  alt="L'équipe du May Milton"          loading="lazy" width="600" height="340">
+        <img src="images/facadeR.webp"  alt="Façade du restaurant May Milton" loading="lazy" width="600" height="340">
       </div>
     </div>
   </section>
 
-  <!-- ===== GALERIE ===== -->
-  <section class="galerie">
+  <!-- GALERIE -->
+  <section class="galerie" aria-label="Galerie photos">
     <div class="galerie-grid">
-      <img src="images/cathedral_albi.png" alt="Cathédrale Sainte-Cécile d'Albi">
-      <img src="images/plat2.webp" alt="Plat fait maison">
-      <img src="images/dessert.PNG" alt="Dessert du May Milton">
+      <img src="images/cathedral_albi.png" alt="Cathédrale Sainte-Cécile d'Albi au coucher du soleil" loading="lazy" width="800" height="300">
+      <img src="images/plat2.webp"         alt="Plat fait maison du May Milton"                       loading="lazy" width="400" height="300">
+      <img src="images/dessert.PNG"        alt="Dessert maison du May Milton"                          loading="lazy" width="400" height="300">
     </div>
   </section>
 
-  <!-- ===== VIDEO + RÉSERVATION ===== -->
-  <section class="video-reserve" id="reserver">
+  <!-- PRIVATISATION -->
+  <section class="privatisation" id="privatisation">
     <div class="section-header">
-      <p class="section-kicker">Découvrez & Réservez</p>
-      <h2 class="section-title">Notre univers en vidéo</h2>
+      <p class="section-kicker">Événements &amp; Séminaires</p>
+      <h2 class="section-title">Privatisation de l'espace</h2>
     </div>
-    <div class="vr-inner">
-      <div class="vr-block">
-        <h3>Le May Milton en images</h3>
-        <div class="video-wrap">
-          <iframe
-            src="https://www.youtube.com/embed/x5NJKO34JXA"
-            title="Le May Milton – Restaurant Albi"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
+    <div class="priv-inner">
+
+      <div>
+        <p class="priv-label">Le May Milton en vidéo</p>
+        <div class="video-short-wrap">
+          <div class="video-short-ratio">
+            <iframe
+              src="https://www.youtube.com/embed/x5NJKO34JXA"
+              title="Le May Milton – Restaurant &amp; Salon de Thé – Albi"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
         </div>
       </div>
-      <div class="vr-block">
-        <h3>Réserver votre table</h3>
-        <div class="reserve-wrap">
-          <iframe
-            src="https://app.overfull.fr/booking-v2/?key_id=Ad7AvU3hT3e"
-            title="Réservation en ligne – Le May Milton">
-          </iframe>
+
+      <div>
+        <p class="priv-label">Notre salle privatisable</p>
+        <div class="priv-img-wrap">
+          <img
+            src="images/interieur.webp"
+            alt="Salle intérieure privatisable du May Milton – pierres apparentes et jardin"
+            loading="lazy"
+            width="800" height="600"
+          >
         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RÉSERVATION -->
+  <section class="reservation" id="reserver">
+    <div class="section-header">
+      <p class="section-kicker">Disponibilités en temps réel</p>
+      <h2 class="section-title">Réserver votre table</h2>
+    </div>
+    <div class="reserve-inner">
+      <div class="reserve-frame-wrap">
+        <iframe
+          src="https://app.overfull.fr/booking-v2/?key_id=Ad7AvU3hT3e"
+          title="Réservation en ligne – Le May Milton – Albi"
+          loading="lazy">
+        </iframe>
       </div>
     </div>
   </section>
 
-  <!-- ===== FEATURES BAR ===== -->
-  <section class="features">
+  <!-- FEATURES BAR -->
+  <section class="features" aria-label="Points forts du restaurant">
     <div class="features-grid">
       <div class="feature">
-        <div class="feature-icon">🏛️</div>
+        <div class="feature-icon" aria-hidden="true">🏛️</div>
         <h3>Cadre historique</h3>
-        <p>Site archéologique classé, pierres apparentes, au pied de la Cathédrale Sainte-Cécile, Patrimoine Mondial de l'UNESCO.</p>
+        <p>Site archéologique classé, pierres apparentes, au pied de la Cathédrale Sainte-Cécile, Patrimoine UNESCO.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">🍽️</div>
+        <div class="feature-icon" aria-hidden="true">🍽️</div>
         <h3>Cuisine fait maison</h3>
-        <p>100% fait maison, produits frais de saison. Formules déjeuner dès 15 € et dîner dès 17 €. Petit-déjeuner à 8 €.</p>
+        <p>100% fait maison, produits frais de saison. Formules déjeuner dès 15 € et dîner dès 17 €.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">☀️</div>
+        <div class="feature-icon" aria-hidden="true">☀️</div>
         <h3>Terrasse estivale</h3>
         <p>Jusqu'à 50 couverts en terrasse l'été. Un cadre idéal, en plein air, pour profiter du soleil albigeois.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">🥂</div>
+        <div class="feature-icon" aria-hidden="true">🥂</div>
         <h3>Espace privatisable</h3>
-        <p>Étage privatisable de 30 à 45 personnes. Vue sur le Palais de la Berbie. Idéal séminaires & repas de famille.</p>
+        <p>Étage privatisable 30 à 45 personnes. Vue sur le Palais de la Berbie. Idéal séminaires &amp; famille.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== AVIS ===== -->
-  <section class="avis">
+  <!-- AVIS -->
+  <section class="avis" aria-label="Avis clients">
     <div class="section-header">
       <p class="section-kicker">Ce qu'ils en pensent</p>
       <h2 class="section-title">Les avis de nos clients</h2>
     </div>
     <div class="avis-inner">
-      <div class="avis-card" id="avisCard">
+      <div class="avis-card" id="avisCard" role="region" aria-live="polite">
         <div class="avis-google-row">
-          <svg class="g-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <svg class="g-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path fill="#EA4335" d="M24 9.5c3.5 0 6.3 1.2 8.5 3.2l6.3-6.3C34.8 3 29.7 1 24 1 14.6 1 6.6 6.5 2.9 14.4l7.4 5.7C12.1 13.7 17.6 9.5 24 9.5z"/>
             <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.6h12.7c-.6 3-2.3 5.5-4.8 7.2l7.4 5.7C43.9 37.2 46.5 31.3 46.5 24.5z"/>
             <path fill="#FBBC05" d="M10.3 28.7C9.8 27.2 9.5 25.6 9.5 24s.3-3.2.8-4.7L2.9 13.6C1.1 17 0 20.9 0 24s1.1 7 2.9 10.4l7.4-5.7z"/>
@@ -809,10 +747,9 @@
         <p class="avis-text" id="avisText">"Un endroit magique au pied de la cathédrale. La cuisine est délicieuse, tout est fait maison. L'équipe est chaleureuse et le cadre avec les pierres apparentes est vraiment unique."</p>
         <p class="avis-author" id="avisAuthor">— Marie L.</p>
       </div>
-
       <div class="avis-nav">
         <button class="avis-btn" id="prevAvis" aria-label="Avis précédent">
-          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div class="avis-dots" id="avisDots">
           <div class="dot active" data-i="0"></div>
@@ -821,23 +758,23 @@
           <div class="dot" data-i="3"></div>
         </div>
         <button class="avis-btn" id="nextAvis" aria-label="Avis suivant">
-          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <svg viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
     </div>
   </section>
 
-  <!-- ===== CONTACT + HORAIRES + MAP ===== -->
-  <section class="contact-section">
+  <!-- CONTACT + HORAIRES + MAP -->
+  <section class="contact-section" id="contact">
     <div class="section-header" style="margin-bottom:50px;">
       <p class="section-kicker">Venir nous voir</p>
-      <h2 class="section-title">Contact & Horaires</h2>
+      <h2 class="section-title">Contact &amp; Horaires</h2>
     </div>
     <div class="contact-inner">
       <div class="contact-block">
         <h3>Contact</h3>
         <p>
-          <a href="tel:+33565000000">+33 (0)5 63 XX XX XX</a><br>
+          <a href="tel:+33563000000">+33 (0)5 63 XX XX XX</a><br>
           Place Sainte-Cécile<br>
           81000 Albi – FRANCE<br><br>
           <a href="mailto:contact@lemaymilton.fr">contact@lemaymilton.fr</a><br><br>
@@ -847,10 +784,10 @@
       </div>
       <div class="contact-block">
         <h3>Horaires</h3>
-        <div class="horaire-row"><span class="day">Lundi</span><span class="fermé">Fermé</span></div>
+        <div class="horaire-row"><span class="day">Lundi</span><span class="ferme">Fermé</span></div>
         <div class="horaire-row open"><span class="day">Mardi</span><span class="time">09h – 18h</span></div>
         <div class="horaire-row open"><span class="day">Mercredi</span><span class="time">09h – 18h</span></div>
-        <div class="horaire-row"><span class="day">Jeudi</span><span class="time">09h – 21h30</span></div>
+        <div class="horaire-row open"><span class="day">Jeudi</span><span class="time">09h – 21h30</span></div>
         <div class="horaire-row open"><span class="day">Vendredi</span><span class="time">09h – 21h30</span></div>
         <div class="horaire-row open"><span class="day">Samedi</span><span class="time">09h – 21h30</span></div>
         <div class="horaire-row open"><span class="day">Dimanche</span><span class="time">09h – 18h</span></div>
@@ -858,22 +795,22 @@
       </div>
       <div class="map-wrap">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2845.3879743!2d2.1449!3d43.9278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aeb8e6c0:0x1234!2sCath%C3%A9drale+Sainte-C%C3%A9cile+d%27Albi!5e0!3m2!1sfr!2sfr!4v1"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5690.8!2d2.1449!3d43.9278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aeb8de8c8cf8bf%3A0xad3ae5d7fb95fbdd!2sCath%C3%A9drale+Sainte-C%C3%A9cile+d%27Albi!5e0!3m2!1sfr!2sfr!4v1"
           allowfullscreen
           loading="lazy"
-          title="Localisation du May Milton – Albi">
+          title="Localisation du May Milton – Albi, Cathédrale Sainte-Cécile">
         </iframe>
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-top">
       <div class="footer-logo">
-        <img src="images/logo.png" alt="Le May Milton">
+        <img src="images/logo.png" alt="Le May Milton" width="120" height="54" loading="lazy">
       </div>
-      <p class="footer-tagline">Restaurant · Salon de Thé · Albi</p>
+      <p class="footer-tagline">Restaurant &nbsp;·&nbsp; Salon de Thé &nbsp;·&nbsp; Albi</p>
       <div class="footer-socials">
         <a href="#" aria-label="Facebook">f</a>
         <a href="#" aria-label="Instagram">in</a>
@@ -882,7 +819,7 @@
     <div class="footer-bottom">
       <div class="footer-links">
         <a href="#">Mentions légales</a>
-        <a href="#">Politique de confidentialité</a>
+        <a href="#">Confidentialité</a>
         <a href="#reserver">Réserver</a>
       </div>
       <p class="footer-copy">© 2026 Le May Milton – Tous droits réservés</p>
@@ -890,60 +827,49 @@
   </footer>
 
   <script>
-    /* === NAVBAR scroll === */
+    /* === Navbar scroll === */
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
-    });
+    }, { passive: true });
 
-    /* === AVIS carousel === */
+    /* === Carousel avis === */
     const reviews = [
-      {
-        text: '"Un endroit magique au pied de la cathédrale. La cuisine est délicieuse, tout est fait maison. L\'équipe est chaleureuse et le cadre avec les pierres apparentes est vraiment unique."',
-        author: '— Marie L.',
-        stars: 5
-      },
-      {
-        text: '"Excellent restaurant, cuisine fraîche et savoureuse. La terrasse avec vue sur la cathédrale est splendide. Je recommande vivement les formules du midi, rapport qualité-prix imbattable."',
-        author: '— Thomas B.',
-        stars: 5
-      },
-      {
-        text: '"Une adresse incontournable à Albi. Cadre historique magnifique, service attentionné et plats faits maison délicieux. Le dessert était à tomber !"',
-        author: '— Sophie R.',
-        stars: 5
-      },
-      {
-        text: '"Superbe découverte lors de notre passage à Albi. L\'équipe est adorable, la cuisine est fraîche et gourmande. On reviendra sûrement lors de notre prochain séjour !"',
-        author: '— Un utilisateur Google',
-        stars: 5
-      }
+      { text: '"Un endroit magique au pied de la cathédrale. La cuisine est délicieuse, tout est fait maison. L\'équipe est chaleureuse et le cadre avec les pierres apparentes est vraiment unique."', author: '— Marie L.', stars: 5 },
+      { text: '"Excellent restaurant, cuisine fraîche et savoureuse. La terrasse avec vue sur la cathédrale est splendide. Je recommande vivement les formules du midi, rapport qualité-prix imbattable."', author: '— Thomas B.', stars: 5 },
+      { text: '"Une adresse incontournable à Albi. Cadre historique magnifique, service attentionné et plats faits maison délicieux. Le dessert était à tomber !"', author: '— Sophie R.', stars: 5 },
+      { text: '"Superbe découverte lors de notre passage à Albi. L\'équipe est adorable, la cuisine est fraîche et gourmande. On reviendra sûrement lors de notre prochain séjour !"', author: '— Un utilisateur Google', stars: 5 }
     ];
 
     let current = 0;
+    let autoTimer = null;
 
-    function showReview(i, dir = 1) {
+    function showReview(i) {
       const card = document.getElementById('avisCard');
       card.style.opacity = '0';
       setTimeout(() => {
-        current = (i + reviews.length) % reviews.length;
+        current = ((i % reviews.length) + reviews.length) % reviews.length;
         const r = reviews[current];
-        document.getElementById('avisText').textContent = r.text;
+        document.getElementById('avisText').textContent   = r.text;
         document.getElementById('avisAuthor').textContent = r.author;
-        document.getElementById('avisStars').textContent = '★'.repeat(r.stars);
+        document.getElementById('avisStars').textContent  = '★'.repeat(r.stars);
         document.querySelectorAll('.dot').forEach((d, j) => d.classList.toggle('active', j === current));
         card.style.opacity = '1';
-      }, 200);
+      }, 220);
     }
 
-    document.getElementById('nextAvis').addEventListener('click', () => showReview(current + 1));
-    document.getElementById('prevAvis').addEventListener('click', () => showReview(current - 1));
+    function startAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => showReview(current + 1), 6000);
+    }
+
+    document.getElementById('nextAvis').addEventListener('click', () => { showReview(current + 1); startAuto(); });
+    document.getElementById('prevAvis').addEventListener('click', () => { showReview(current - 1); startAuto(); });
     document.querySelectorAll('.dot').forEach(d => {
-      d.addEventListener('click', () => showReview(parseInt(d.dataset.i)));
+      d.addEventListener('click', () => { showReview(parseInt(d.dataset.i)); startAuto(); });
     });
 
-    // Auto-play reviews
-    setInterval(() => showReview(current + 1), 6000);
+    startAuto();
   </script>
 </body>
 </html>
