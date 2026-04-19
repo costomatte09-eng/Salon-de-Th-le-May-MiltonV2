@@ -73,7 +73,18 @@
       cursor: pointer;
       padding: 8px;
     }
-    .nav-menu span { display: block; width: 26px; height: 1.5px; background: white; }
+    .nav-menu span {
+      display: block;
+      width: 26px;
+      height: 1.5px;
+      background: white;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    /* Hamburger → croix quand ouvert */
+    .nav-menu.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-menu.is-open span:nth-child(2) { opacity: 0; }
+    .nav-menu.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
     .nav-cta {
       display: flex;
       align-items: center;
@@ -94,6 +105,48 @@
     }
     nav.scrolled .nav-cta { background: var(--gold); }
     .nav-cta:hover { background: var(--gold); }
+
+    /* ===================================================
+       MENU OVERLAY MOBILE / DESKTOP
+    =================================================== */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 190;
+      background: rgba(26,39,68,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .menu-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .menu-overlay a {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(24px, 5vw, 42px);
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      padding: 10px 20px;
+      transition: color 0.2s, letter-spacing 0.2s;
+    }
+    .menu-overlay a:hover { color: var(--gold-light); letter-spacing: 5px; }
+    .menu-overlay .overlay-separator {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.2);
+      margin: 6px 0;
+    }
 
     /* ===================================================
        HERO
@@ -206,10 +259,13 @@
       color: var(--navy);
       margin-top: 28px;
       transition: all 0.25s;
+      cursor: pointer;
+      background: none;
+      font-size: 12px;
     }
     .btn-outline:hover { background: var(--navy); color: white; }
 
-    /* 2 photos (sans intérieur, déplacé dans Privatisation) */
+    /* 2 photos */
     .about-photos {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -240,6 +296,129 @@
       object-fit: cover;
       border-radius: var(--radius);
     }
+    /* Dessert : conserver l'image entière sans déformation */
+    .galerie-grid .galerie-dessert {
+      object-fit: contain;
+      background: var(--cream);
+    }
+
+    /* ===================================================
+       FORMULES
+    =================================================== */
+    .formules {
+      background: var(--navy);
+      padding: 90px 0;
+    }
+    .formules .section-kicker { color: var(--gold-light); }
+    .formules .section-title  { color: var(--white); }
+    .formules-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .formule-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      position: relative;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .formule-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(196,162,74,0.45);
+    }
+    .formule-badge {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      border: 1px solid rgba(196,162,74,0.4);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+    }
+    .formule-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .formule-detail {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.6);
+      line-height: 2;
+      margin-bottom: 24px;
+    }
+    .formule-detail li {
+      list-style: none;
+      padding-left: 18px;
+      position: relative;
+    }
+    .formule-detail li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+    .formule-prices {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .formule-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .formule-price-label {
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+    .formule-price-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold-light);
+    }
+    .formule-price-value span {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      margin-left: 2px;
+    }
+    /* Carte enfant : accent différent */
+    .formule-card.enfant { border-color: rgba(255,255,255,0.08); }
+    .formule-card.enfant .formule-price-value { font-size: 28px; }
+    /* Texte bas de section */
+    .formules-note {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding: 0 48px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 32px;
+      justify-content: center;
+    }
+    .formules-note p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      line-height: 2;
+    }
 
     /* ===================================================
        SECTION HEADER (partagé)
@@ -266,12 +445,32 @@
     }
 
     /* ===================================================
-       PRIVATISATION (vidéo Short + image intérieur)
+       PRIVATISATION — motif + vidéo poster
     =================================================== */
     .privatisation {
       background: var(--cream);
       padding: 90px 0;
+      position: relative;
+      overflow: hidden;
     }
+    /* Motif décoratif discret en arrière-plan */
+    .privatisation::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 12% 22%, rgba(154,126,53,0.10) 0%, transparent 42%),
+        radial-gradient(circle at 83% 70%, rgba(26,39,68,0.07)   0%, transparent 38%),
+        radial-gradient(circle at 55% 8%,  rgba(154,126,53,0.07) 0%, transparent 32%),
+        radial-gradient(circle at 28% 85%, rgba(26,39,68,0.05)   0%, transparent 35%),
+        radial-gradient(circle at 70% 40%, rgba(154,126,53,0.04) 0%, transparent 28%);
+      pointer-events: none;
+    }
+    /* S'assurer que tout le contenu passe au-dessus du motif */
+    .privatisation .section-header,
+    .priv-inner { position: relative; z-index: 1; }
+
     .priv-inner {
       max-width: 1200px;
       margin: 0 auto;
@@ -290,7 +489,7 @@
       margin-bottom: 14px;
     }
 
-    /* Vidéo Short — ratio 9:16 strict */
+    /* Vidéo Short — ratio 9:16 strict + click-to-play */
     .video-short-wrap {
       border-radius: var(--radius);
       overflow: hidden;
@@ -303,12 +502,32 @@
       height: 0;
       overflow: hidden;
     }
-    .video-short-ratio iframe {
+    .video-short-ratio iframe,
+    .yt-poster,
+    .yt-play-btn {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
       border: none;
     }
+    .yt-poster {
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+    .yt-poster:hover { transform: scale(1.03); }
+    .yt-play-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: opacity 0.2s;
+    }
+    .yt-play-btn:hover { opacity: 0.85; }
+    .yt-play-btn svg { width: 68px; height: 48px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
 
     /* Image intérieur */
     .priv-img-wrap {
@@ -499,6 +718,123 @@
     .footer-copy { font-size: 11px; color: rgba(255,255,255,0.3); font-family: 'Raleway', sans-serif; }
 
     /* ===================================================
+       MODALE RÉSERVATION
+    =================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(10,18,40,0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-box {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 48px 40px 40px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 30px 80px rgba(10,18,40,0.3);
+      position: relative;
+      transform: translateY(16px) scale(0.97);
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+    .modal-backdrop.is-open .modal-box {
+      transform: translateY(0) scale(1);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-mid);
+      font-size: 22px;
+      line-height: 1;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-close:hover { background: var(--cream); color: var(--navy); }
+    .modal-eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .modal-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 30px;
+    }
+    .modal-choices {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .modal-btn-form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 16px 28px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.25s;
+    }
+    .modal-btn-form:hover { background: var(--gold); }
+    .modal-btn-call {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: white;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+      border-radius: 50px;
+      padding: 15px 28px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .modal-btn-call:hover { background: var(--navy); color: white; }
+    .modal-note {
+      margin-top: 22px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      color: rgba(74,74,90,0.55);
+    }
+
+    /* ===================================================
        RESPONSIVE — TABLETTE (≤ 1024px)
     =================================================== */
     @media (max-width: 1024px) {
@@ -508,6 +844,8 @@
       .contact-section { padding: 90px 32px; }
       .contact-inner { grid-template-columns: 1fr 1fr; }
       .map-wrap { grid-column: 1 / -1; }
+      .formules-grid { grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 32px; }
+      .formules-note { padding: 0 32px; padding-top: 32px; }
     }
 
     /* ===================================================
@@ -519,7 +857,8 @@
       nav { padding: 14px 20px; }
       nav.scrolled { padding: 10px 20px; }
       .nav-logo img { height: 36px; }
-      .nav-menu { display: none; }
+      /* Hamburger visible sur mobile */
+      .nav-menu { display: flex; }
       .nav-cta { padding: 10px 18px; font-size: 11px; letter-spacing: 1px; }
 
       /* Hero */
@@ -538,6 +877,14 @@
       .galerie { padding: 0 0 56px; }
       .galerie-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 12px; padding: 0 20px; }
       .galerie-grid img { height: 220px; width: 100%; }
+      /* Correction dessert sur mobile : image entière sans déformation */
+      .galerie-grid .galerie-dessert { height: auto; min-height: 160px; object-fit: contain; background: var(--cream); }
+
+      /* Formules */
+      .formules { padding: 64px 0; }
+      .formules-grid { grid-template-columns: 1fr; padding: 0 20px; gap: 16px; }
+      .formule-card { padding: 28px 24px; }
+      .formules-note { padding: 0 20px; padding-top: 28px; }
 
       /* Privatisation */
       .privatisation { padding: 64px 0; }
@@ -575,6 +922,9 @@
 
       /* Section headers */
       .section-header { padding: 0 16px; margin-bottom: 40px; }
+
+      /* Modale */
+      .modal-box { padding: 40px 24px 32px; }
     }
 
     /* ===================================================
@@ -597,11 +947,24 @@
     <a href="#" class="nav-logo">
       <img src="images/logo.png" alt="Le May Milton – Restaurant &amp; Salon de Thé" width="120" height="46">
     </a>
-    <button class="nav-menu" aria-label="Ouvrir le menu">
+    <button class="nav-menu" id="navMenuBtn" aria-label="Ouvrir le menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <a href="#reserver" class="nav-cta">Réserver ↗</a>
+    <button class="nav-cta open-modal" aria-label="Réserver une table">Réserver ↗</button>
   </nav>
+
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay" id="menuOverlay" role="dialog" aria-label="Navigation principale">
+    <a href="#about"          class="overlay-link">Notre histoire</a>
+    <div class="overlay-separator" aria-hidden="true"></div>
+    <a href="#formules"       class="overlay-link">Nos formules</a>
+    <div class="overlay-separator" aria-hidden="true"></div>
+    <a href="#privatisation"  class="overlay-link">Privatisation</a>
+    <div class="overlay-separator" aria-hidden="true"></div>
+    <a href="#contact"        class="overlay-link">Contact &amp; Horaires</a>
+    <div class="overlay-separator" aria-hidden="true"></div>
+    <a href="#reserver"       class="overlay-link open-modal">Réserver</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -627,7 +990,7 @@
         <h2>Le Salon De Thé-Restaurant<br><strong>Le May Milton</strong></h2>
         <p class="about-desc">Au pied de la Cathédrale Sainte-Cécile et du Musée Toulouse-Lautrec, le May Milton vous accueille dans un cadre historique exceptionnel — pierres apparentes, site archéologique classé, jardins suspendus et bassin aux carpes.</p>
         <p class="about-desc" style="margin-top:12px;">Notre cuisine est <strong>100% fait maison</strong>, élaborée à partir de produits frais et de saison. Jusqu'à 100 couverts en salle et terrasse, avec un étage privatisable pour vos événements.</p>
-        <a href="#reserver" class="btn-outline">Réserver une table →</a>
+        <button class="btn-outline open-modal">Réserver une table →</button>
       </div>
       <div class="about-photos">
         <img src="images/apropos.webp"  alt="L'équipe du May Milton"          loading="lazy" width="600" height="340">
@@ -641,7 +1004,80 @@
     <div class="galerie-grid">
       <img src="images/cathedral_albi.png" alt="Cathédrale Sainte-Cécile d'Albi au coucher du soleil" loading="lazy" width="800" height="300">
       <img src="images/plat2.webp"         alt="Plat fait maison du May Milton"                       loading="lazy" width="400" height="300">
-      <img src="images/dessert.PNG"        alt="Dessert maison du May Milton"                          loading="lazy" width="400" height="300">
+      <img src="images/dessert.PNG"        alt="Dessert maison du May Milton"                          loading="lazy" width="400" height="300" class="galerie-dessert">
+    </div>
+  </section>
+
+  <!-- FORMULES -->
+  <section class="formules" id="formules">
+    <div class="section-header">
+      <p class="section-kicker">Petits-déjeuners · Déjeuners · Dîners</p>
+      <h2 class="section-title">Nos formules 2026</h2>
+    </div>
+    <div class="formules-grid">
+
+      <!-- Formule 1 -->
+      <article class="formule-card">
+        <p class="formule-badge">Formule 1</p>
+        <h3>Entrée &amp; Plat<br>ou Plat &amp; Dessert</h3>
+        <ul class="formule-detail">
+          <li>Entrée + plat <em>ou</em> plat + dessert</li>
+          <li>Produits frais, 100% fait maison</li>
+        </ul>
+        <div class="formule-prices">
+          <div class="formule-price-row">
+            <span class="formule-price-label">Midi semaine</span>
+            <span class="formule-price-value">16<span>€</span></span>
+          </div>
+          <div class="formule-price-row">
+            <span class="formule-price-label">Soir &amp; Dimanche</span>
+            <span class="formule-price-value">18<span>€</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Formule 2 -->
+      <article class="formule-card">
+        <p class="formule-badge">Formule 2</p>
+        <h3>Menu Complet<br>Entrée · Plat · Dessert</h3>
+        <ul class="formule-detail">
+          <li>Entrée + plat + dessert</li>
+          <li>Produits frais, 100% fait maison</li>
+        </ul>
+        <div class="formule-prices">
+          <div class="formule-price-row">
+            <span class="formule-price-label">Midi semaine</span>
+            <span class="formule-price-value">19<span>€</span></span>
+          </div>
+          <div class="formule-price-row">
+            <span class="formule-price-label">Soir &amp; Dimanche</span>
+            <span class="formule-price-value">21<span>€</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Formule enfant -->
+      <article class="formule-card enfant">
+        <p class="formule-badge">Menu Enfant</p>
+        <h3>Menu Kids<br>Jusqu'à 12 ans</h3>
+        <ul class="formule-detail">
+          <li>Adapté aux petits appétits</li>
+          <li>Tous services</li>
+        </ul>
+        <div class="formule-prices">
+          <div class="formule-price-row">
+            <span class="formule-price-label">Tous services</span>
+            <span class="formule-price-value">10<span>€</span></span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Note tarifaire bas de section -->
+    <div class="formules-note">
+      <p>Petit-déjeuner 8&thinsp;€ &nbsp;·&nbsp; Plat du jour seul 15&thinsp;€ &nbsp;·&nbsp; À la carte : entrées dès 6&thinsp;€, plats jusqu'à 25&thinsp;€</p>
+      <p>Vins au verre 5–6&thinsp;€ &nbsp;·&nbsp; Bouteille 25–28&thinsp;€</p>
     </div>
   </section>
 
@@ -655,14 +1091,31 @@
 
       <div>
         <p class="priv-label">Le May Milton en vidéo</p>
-        <div class="video-short-wrap">
+        <!-- Vidéo YouTube avec click-to-play et poster -->
+        <div class="video-short-wrap" id="ytWrap">
           <div class="video-short-ratio">
+            <img
+              src="images/privatisation-poster.webp"
+              alt="Aperçu vidéo – Le May Milton, restaurant &amp; salon de thé à Albi"
+              class="yt-poster"
+              id="ytPoster"
+              loading="lazy"
+              width="315" height="560"
+            >
+            <button class="yt-play-btn" id="ytPlayBtn" aria-label="Lancer la vidéo">
+              <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill="rgba(0,0,0,0.55)" d="M66.5 7.7A8.5 8.5 0 0 0 60.4 1C55.1 0 34 0 34 0S12.9 0 7.6 1A8.5 8.5 0 0 0 1.5 7.7C0 13 0 24 0 24s0 11 1.5 16.3A8.5 8.5 0 0 0 7.6 47c5.3 1 26.4 1 26.4 1s21.1 0 26.4-1a8.5 8.5 0 0 0 6.1-6.7C68 35 68 24 68 24S68 13 66.5 7.7z"/>
+                <path fill="#fff" d="M27 34.5V13.5l18 10.5z"/>
+              </svg>
+            </button>
             <iframe
-              src="https://www.youtube.com/embed/x5NJKO34JXA"
+              id="ytIframe"
+              src=""
+              data-src="https://www.youtube.com/embed/x5NJKO34JXA?autoplay=1&rel=0"
               title="Le May Milton – Restaurant &amp; Salon de Thé – Albi"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
-              loading="lazy">
+              style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; border:none;">
             </iframe>
           </div>
         </div>
@@ -711,7 +1164,7 @@
       <div class="feature">
         <div class="feature-icon" aria-hidden="true">🍽️</div>
         <h3>Cuisine fait maison</h3>
-        <p>100% fait maison, produits frais de saison. Formules déjeuner dès 15 € et dîner dès 17 €.</p>
+        <p>100% fait maison, produits frais de saison. Formules déjeuner dès 16 € et dîner dès 18 €.</p>
       </div>
       <div class="feature">
         <div class="feature-icon" aria-hidden="true">☀️</div>
@@ -774,7 +1227,7 @@
       <div class="contact-block">
         <h3>Contact</h3>
         <p>
-          <a href="tel:+33563000000">+33 (0)5 63 XX XX XX</a><br>
+          <a href="tel:+33563436158">05 63 43 61 58</a><br>
           Place Sainte-Cécile<br>
           81000 Albi – FRANCE<br><br>
           <a href="mailto:contact@lemaymilton.fr">contact@lemaymilton.fr</a><br><br>
@@ -820,20 +1273,135 @@
       <div class="footer-links">
         <a href="#">Mentions légales</a>
         <a href="#">Confidentialité</a>
-        <a href="#reserver">Réserver</a>
+        <a href="#reserver" class="open-modal">Réserver</a>
       </div>
       <p class="footer-copy">© 2026 Le May Milton – Tous droits réservés</p>
     </div>
   </footer>
 
+  <!-- MODALE RÉSERVATION -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Réserver une table">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+      <p class="modal-eyebrow">Réservation</p>
+      <h2 class="modal-title">Comment souhaitez-vous<br>réserver ?</h2>
+      <div class="modal-choices">
+        <a href="#reserver" class="modal-btn-form" id="modalBtnForm">
+          📅&ensp;Réserver avec le formulaire
+        </a>
+        <a href="tel:0563436158" class="modal-btn-call">
+          📞&ensp;Appeler directement
+        </a>
+      </div>
+      <p class="modal-note">Lun. fermé · Mar–Mer 09h–18h · Jeu–Sam 09h–21h30 · Dim 09h–18h</p>
+    </div>
+  </div>
+
   <script>
-    /* === Navbar scroll === */
+    /* ===================================================
+       NAVBAR SCROLL
+    =================================================== */
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    /* === Carousel avis === */
+    /* ===================================================
+       MENU MOBILE
+    =================================================== */
+    const navMenuBtn  = document.getElementById('navMenuBtn');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    function openMenu() {
+      navMenuBtn.classList.add('is-open');
+      menuOverlay.classList.add('is-open');
+      navMenuBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      navMenuBtn.classList.remove('is-open');
+      menuOverlay.classList.remove('is-open');
+      navMenuBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    navMenuBtn.addEventListener('click', () => {
+      navMenuBtn.classList.contains('is-open') ? closeMenu() : openMenu();
+    });
+
+    /* Fermer le menu au clic sur un lien de l'overlay */
+    menuOverlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    /* Fermer le menu avec la touche Échap */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    /* ===================================================
+       MODALE RÉSERVATION
+    =================================================== */
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalClose    = document.getElementById('modalClose');
+    const modalBtnForm  = document.getElementById('modalBtnForm');
+
+    function openModal() {
+      modalBackdrop.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modalBackdrop.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    /* Tous les déclencheurs .open-modal */
+    document.querySelectorAll('.open-modal').forEach(el => {
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        closeMenu(); /* ferme le menu si ouvert */
+        openModal();
+      });
+    });
+
+    /* "Réserver avec le formulaire" → ferme la modale + scroll vers #reserver */
+    modalBtnForm.addEventListener('click', e => {
+      e.preventDefault();
+      closeModal();
+      setTimeout(() => {
+        document.getElementById('reserver').scrollIntoView({ behavior: 'smooth' });
+      }, 320);
+    });
+
+    /* Fermeture : croix, backdrop, Échap */
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', e => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modalBackdrop.classList.contains('is-open')) closeModal();
+    });
+
+    /* ===================================================
+       YOUTUBE CLICK-TO-PLAY (poster)
+    =================================================== */
+    const ytPoster  = document.getElementById('ytPoster');
+    const ytPlayBtn = document.getElementById('ytPlayBtn');
+    const ytIframe  = document.getElementById('ytIframe');
+
+    function loadYouTube() {
+      ytIframe.src = ytIframe.dataset.src;
+      ytIframe.style.display = 'block';
+      ytPoster.style.display  = 'none';
+      ytPlayBtn.style.display = 'none';
+    }
+
+    ytPlayBtn.addEventListener('click', loadYouTube);
+    ytPoster.addEventListener('click', loadYouTube);
+
+    /* ===================================================
+       CAROUSEL AVIS
+    =================================================== */
     const reviews = [
       { text: '"Un endroit magique au pied de la cathédrale. La cuisine est délicieuse, tout est fait maison. L\'équipe est chaleureuse et le cadre avec les pierres apparentes est vraiment unique."', author: '— Marie L.', stars: 5 },
       { text: '"Excellent restaurant, cuisine fraîche et savoureuse. La terrasse avec vue sur la cathédrale est splendide. Je recommande vivement les formules du midi, rapport qualité-prix imbattable."', author: '— Thomas B.', stars: 5 },
@@ -841,7 +1409,7 @@
       { text: '"Superbe découverte lors de notre passage à Albi. L\'équipe est adorable, la cuisine est fraîche et gourmande. On reviendra sûrement lors de notre prochain séjour !"', author: '— Un utilisateur Google', stars: 5 }
     ];
 
-    let current = 0;
+    let current  = 0;
     let autoTimer = null;
 
     function showReview(i) {
