@@ -718,9 +718,25 @@
     .footer-copy { font-size: 11px; color: rgba(255,255,255,0.3); font-family: 'Raleway', sans-serif; }
 
     /* ===================================================
-       MODALE RÉSERVATION
+       ANIMATION FEATURES (fade-in + slide-up, CSS + IntersectionObserver)
     =================================================== */
-    .modal-backdrop {
+    .feature {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .feature.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .feature:nth-child(1) { transition-delay: 0s;    }
+    .feature:nth-child(2) { transition-delay: 0.12s; }
+    .feature:nth-child(3) { transition-delay: 0.24s; }
+    .feature:nth-child(4) { transition-delay: 0.36s; }
+
+    /* ===================================================
+       MODALE RÉSERVATION — styles
+    =================================================== */
       position: fixed;
       inset: 0;
       z-index: 500;
@@ -1265,8 +1281,12 @@
       </div>
       <p class="footer-tagline">Restaurant &nbsp;·&nbsp; Salon de Thé &nbsp;·&nbsp; Albi</p>
       <div class="footer-socials">
-        <a href="#" aria-label="Facebook">f</a>
-        <a href="#" aria-label="Instagram">in</a>
+        <a href="https://www.facebook.com/Le.May.Milton/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/lemaymilton/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1298,6 +1318,23 @@
   </div>
 
   <script>
+    /* ===================================================
+       ANIMATION FEATURES — IntersectionObserver
+    =================================================== */
+    (function () {
+      var features = document.querySelectorAll('.feature');
+      if (!features.length) return;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      features.forEach(function (el) { observer.observe(el); });
+    })();
+
     /* ===================================================
        NAVBAR SCROLL
     =================================================== */
