@@ -1464,38 +1464,61 @@
       { text: '"Resto proche de la cathédrale avec accueil sympa et personnel souriant. Choix et spécialités locales dont le perlé pour l\'apéro. À découvrir !"', author: '— Patrick H.', stars: 5 }
     ];
 
-    let current  = 0;
+    /* --- Configuration pagination --- */
+    const TOTAL_DOTS = 5;
+    /* Taille d'un groupe : arrondi supérieur pour couvrir tous les avis */
+    const groupSize  = Math.ceil(reviews.length / TOTAL_DOTS);
+
+    let current   = 0;
     let autoTimer = null;
 
-    /* Génération dynamique des dots */
+    /* --- Génération des 5 dots fixes --- */
     const dotsContainer = document.getElementById('avisDots');
-    reviews.forEach(function(_, i) {
+
+    for (let i = 0; i < TOTAL_DOTS; i++) {
       const dot = document.createElement('div');
       dot.className = 'dot' + (i === 0 ? ' active' : '');
-      dot.dataset.i = i;
-      dot.addEventListener('click', function() { showReview(i); startAuto(); });
+      dot.dataset.group = i;
+      /* Cliquer sur un dot → premier avis du groupe correspondant */
+      dot.addEventListener('click', function() {
+        showReview(i * groupSize);
+        startAuto();
+      });
       dotsContainer.appendChild(dot);
-    });
+    }
 
+    /* Retourne l'indice du dot actif (0-4) pour un index d'avis donné */
+    function getActiveDot(reviewIndex) {
+      return Math.min(Math.floor(reviewIndex / groupSize), TOTAL_DOTS - 1);
+    }
+
+    /* --- Affichage d'un avis --- */
     function showReview(i) {
       const card = document.getElementById('avisCard');
       card.style.opacity = '0';
       setTimeout(() => {
+        /* Boucle infinie : modulo avec gestion des négatifs */
         current = ((i % reviews.length) + reviews.length) % reviews.length;
         const r = reviews[current];
         document.getElementById('avisText').textContent   = r.text;
         document.getElementById('avisAuthor').textContent = r.author;
         document.getElementById('avisStars').textContent  = '★'.repeat(r.stars);
-        document.querySelectorAll('.dot').forEach((d, j) => d.classList.toggle('active', j === current));
+        /* Mise à jour du dot actif */
+        const activeDot = getActiveDot(current);
+        document.querySelectorAll('.dot').forEach((d, j) =>
+          d.classList.toggle('active', j === activeDot)
+        );
         card.style.opacity = '1';
       }, 220);
     }
 
+    /* --- Autoplay --- */
     function startAuto() {
       clearInterval(autoTimer);
       autoTimer = setInterval(() => showReview(current + 1), 6000);
     }
 
+    /* --- Flèches --- */
     document.getElementById('nextAvis').addEventListener('click', () => { showReview(current + 1); startAuto(); });
     document.getElementById('prevAvis').addEventListener('click', () => { showReview(current - 1); startAuto(); });
 
